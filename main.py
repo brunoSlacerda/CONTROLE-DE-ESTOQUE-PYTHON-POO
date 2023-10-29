@@ -13,7 +13,7 @@ class Produto():
         self.cursor = ''
 
     def carregaConn(self):
-        self.conn = sqlite3.connect('produtos.db')
+        self.conn = sqlite3.connect('/Users/Bruno/Documents/MEUS PROEJTOS/CONTROLE-DE-ESTOQUE-PYTHON-POO/produtos.db')
         self.cursor = self.conn.cursor()
     
     def cadatroProdutos(self):
@@ -111,7 +111,7 @@ class Sistema():
         self.cursor = ''
 
     def carregaConn(self):
-        self.conn = sqlite3.connect('produtos.db')
+        self.conn = sqlite3.connect('/Users/Bruno/Documents/MEUS PROEJTOS/CONTROLE-DE-ESTOQUE-PYTHON-POO/produtos.db')
         self.cursor = self.conn.cursor()
     
     def confereCadastro(self,nome):
@@ -129,20 +129,24 @@ SELECT nome FROM produtos
 
 
 if __name__ == '__main__':
+    try:
+        opcao = 9
+        conn = sqlite3.connect('/Users/Bruno/Documents/MEUS PROEJTOS/CONTROLE-DE-ESTOQUE-PYTHON-POO/produtos.db')
+        cursor = conn.cursor()
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS produtos(
+                    id integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+                    nome varchar(80) not null,
+                    preco float not null,
+                    quantidade int not null,
+                    quantidadeMinima integer not null
+        );
+    """)
+        conn.close()
+    except Exception as e:
+        print(f"Ocorreu um erro: {e}")
+        input()
     
-    opcao = 9
-    conn = sqlite3.connect('produtos.db')
-    cursor = conn.cursor()
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS produtos(
-                   id integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-                   nome varchar(80) not null,
-                   preco float not null,
-                   quantidade int not null,
-                   quantidadeMinima integer not null
-    );
-""")
-    conn.close()
 # =========================================== MENU PRINCIPAL ===========================================
     while opcao != 0: 
         print()
