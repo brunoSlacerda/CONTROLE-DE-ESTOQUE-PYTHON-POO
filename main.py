@@ -13,7 +13,7 @@ class Produto():
         self.cursor = ''
 
     def carregaConn(self):
-        self.conn = sqlite3.connect('/Users/Bruno/Documents/MEUS PROEJTOS/CONTROLE-DE-ESTOQUE-PYTHON-POO/produtos.db')
+        self.conn = sqlite3.connect(os.path.join(os.path.dirname(__file__), 'produtos.db'))
         self.cursor = self.conn.cursor()
     
     def cadatroProdutos(self):
@@ -111,7 +111,7 @@ class Sistema():
         self.cursor = ''
 
     def carregaConn(self):
-        self.conn = sqlite3.connect('/Users/Bruno/Documents/MEUS PROEJTOS/CONTROLE-DE-ESTOQUE-PYTHON-POO/produtos.db')
+        self.conn = sqlite3.connect(os.path.join(os.path.dirname(__file__), 'produtos.db'))
         self.cursor = self.conn.cursor()
     
     def confereCadastro(self,nome):
@@ -131,7 +131,7 @@ SELECT nome FROM produtos
 if __name__ == '__main__':
     try:
         opcao = 9
-        conn = sqlite3.connect('/Users/Bruno/Documents/MEUS PROEJTOS/CONTROLE-DE-ESTOQUE-PYTHON-POO/produtos.db')
+        conn = sqlite3.connect(os.path.join(os.path.dirname(__file__), 'produtos.db'))
         cursor = conn.cursor()
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS produtos(
